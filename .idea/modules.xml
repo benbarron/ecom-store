@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ecom-api-gateway/ecom-api-gateway.iml" filepath="$PROJECT_DIR$/ecom-api-gateway/ecom-api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecom-cart-service/ecom-cart-service.iml" filepath="$PROJECT_DIR$/ecom-cart-service/ecom-cart-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecom-products-service/ecom-products-service.iml" filepath="$PROJECT_DIR$/ecom-products-service/ecom-products-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecom-service-registry/ecom-service-registry.iml" filepath="$PROJECT_DIR$/ecom-service-registry/ecom-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-boot-ecom-store.iml" filepath="$PROJECT_DIR$/.idea/spring-boot-ecom-store.iml" />
+    </modules>
+  </component>
+</project>

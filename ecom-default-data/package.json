@@ -1,0 +1,22 @@
+{
+  "name": "ecom-default-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "upload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/app-search-node": "^7.12.0",
+    "@types/request": "^2.48.5",
+    "axios": "^0.21.1",
+    "express-session": "^1.17.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/express-session": "^1.17.3"
+  }
+}
