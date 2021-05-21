@@ -26,6 +26,7 @@
     "@nestjs/config": "^0.6.3",
     "@nestjs/core": "^7.6.15",
     "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/platform-fastify": "^7.6.17",
     "@types/connect-redis": "0.0.16",
     "@types/eureka-js-client": "^4.5.2",
     "@types/jsonwebtoken": "^8.5.1",

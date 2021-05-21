@@ -1,10 +1,7 @@
 import { ConfigType } from "./type";
 import {readFileSync} from 'fs';
 
-const sslOptions = {
-  key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
-  cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
-}
+
 
 export const production = (): ConfigType => ({
   server: {
@@ -16,7 +13,6 @@ export const production = (): ConfigType => ({
       enabled: true,
       host: '0.0.0.0',
       port: 443,
-      ...sslOptions
     }
   },
   eureka: {
@@ -52,7 +48,7 @@ export const production = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host:  'session-storage',
+      host:  process.env.REDIS_HOST || 'session-storage',
       port: 6379,
     },
   },

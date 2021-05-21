@@ -7,7 +7,6 @@ networks:
 services:
   express-server:
     container_name: express-server
-    image: node:14
     build: .
     networks:
       - docker-network
@@ -27,11 +26,3 @@ services:
       - 6379:6379
     networks:
       - docker-network
-
-  npm:
-    image: node:14
-    container_name: npm
-    volumes:
-      - .:/var/www/html
-    working_dir: /var/www/html
-    entrypoint: ['npm']

@@ -6,14 +6,10 @@ type HttpsProtocol = {
   enabled: true,
   host: string,
   port: number,
-  key: string,
-  cert: string
 } | {
   enabled: false,
   host?: string,
   port?: number,
-  key?: string,
-  cert?: string
 }
 
 type HttpProtocol = {
