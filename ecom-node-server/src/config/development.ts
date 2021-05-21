@@ -2,10 +2,15 @@ import { ConfigType } from "./type";
 
 export const development = (): ConfigType => ({
   server: {
-    host: '0.0.0.0',
-    port: 8080,
     mode: 'development',
-    prod: false
+    http: {
+      enabled: true,
+      host: '0.0.0.0',
+      port: 8080,
+    },
+    https: {
+      enabled: false,
+    }
   },
   eureka: {
     instance: {
@@ -40,8 +45,8 @@ export const development = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host: '127.0.0.1',
-      port: '6379',
+      host: 'session-storage',
+      port: 6379,
     },
   },
   cors: {
