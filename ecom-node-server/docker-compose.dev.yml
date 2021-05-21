@@ -7,11 +7,7 @@ networks:
 services:
   express-server:
     container_name: express-server
-    image: node:14
-    working_dir: /var/www/app
-    command: ["npm", "run", "start:dev"]
-    volumes:
-      - .:/var/www/app
+    build: .
     networks:
       - docker-network
     depends_on:

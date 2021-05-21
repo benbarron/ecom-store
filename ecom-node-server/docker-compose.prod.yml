@@ -8,10 +8,7 @@ services:
   express-server:
     container_name: express-server
     image: node:14
-    working_dir: /var/www/app
-    command: ["npm", "run", "start:prod"]
-    volumes:
-      - .:/var/www/app
+    build: .
     networks:
       - docker-network
     depends_on:
@@ -30,3 +27,11 @@ services:
       - 6379:6379
     networks:
       - docker-network
+
+  npm:
+    image: node:14
+    container_name: npm
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
