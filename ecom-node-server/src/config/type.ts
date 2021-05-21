@@ -2,11 +2,35 @@ import { EurekaClient } from "eureka-js-client";
 
 type Mode = 'development' | 'production' |'staging'
 
+type HttpsProtocol = {
+  enabled: true,
+  host: string,
+  port: number,
+  key: string,
+  cert: string
+} | {
+  enabled: false,
+  host?: string,
+  port?: number,
+  key?: string,
+  cert?: string
+}
+
+type HttpProtocol = {
+  enabled: true,
+  host: string,
+  port: number 
+} | {
+  enabled: false,
+  host?: string,
+  port?: number 
+}
+
+
 interface Server {
-  host: string
-  port: number
   mode: Mode
-  prod: boolean
+  http: HttpProtocol
+  https: HttpsProtocol
 }
 
 interface Cache {
@@ -17,7 +41,7 @@ interface Cache {
 interface SessionStore {
   type: string
   host: string
-  port: string
+  port: number
 }
 
 interface Session {

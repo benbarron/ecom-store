@@ -1,0 +1,32 @@
+version: '3'
+
+networks:
+  docker-network:
+    driver: bridge
+
+services:
+  express-server:
+    container_name: express-server
+    image: node:14
+    working_dir: /var/www/app
+    command: ["npm", "run", "start:prod"]
+    volumes:
+      - .:/var/www/app
+    networks:
+      - docker-network
+    depends_on:
+      - session-storage
+    environment: 
+      - NODE_ENV=production
+    ports:
+     - 443:443
+     
+  session-storage:
+    container_name: session-storage
+    image: redis:alpine
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 6379:6379
+    networks:
+      - docker-network

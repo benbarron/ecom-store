@@ -1,11 +1,23 @@
 import { ConfigType } from "./type";
+import {readFileSync} from 'fs';
+
+const sslOptions = {
+  key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
+  cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
+}
 
 export const production = (): ConfigType => ({
   server: {
-    host: '0.0.0.0',
-    port: 8080,
     mode: 'production',
-    prod: true
+    http: {
+      enabled: false,
+    },
+    https: {
+      enabled: true,
+      host: '0.0.0.0',
+      port: 443,
+      ...sslOptions
+    }
   },
   eureka: {
     instance: {
@@ -40,8 +52,8 @@ export const production = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host: '127.0.0.1',
-      port: '6379',
+      host:  'session-storage',
+      port: 6379,
     },
   },
   cors: {

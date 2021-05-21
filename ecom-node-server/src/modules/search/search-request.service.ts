@@ -44,6 +44,7 @@ export class AppSearchRequestService {
       });
       return res.data;
     } catch (err) {
+      console.log(err.response.data.errors);
       const status = err.response ? err.response.status : 501;
       throw new HttpException(err.message, status);
     }
