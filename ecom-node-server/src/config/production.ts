@@ -52,7 +52,7 @@ export const production = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host:  process.env.REDIS_HOST || 'localhost',
+      host:  'session-storage',
       port: 6379,
     },
   },
