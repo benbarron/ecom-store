@@ -11,8 +11,10 @@ let options: NestApplicationOptions = {}
 
 if(process.env.NODE_ENV === 'production') {
   Object.assign(options, {
-    key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
-    cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
+    httpsOptions: {
+      key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
+      cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
+    }
   })
 }
 
