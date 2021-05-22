@@ -1,10 +1,15 @@
 import { HttpException } from '@nestjs/common';
 
+interface Product {
+  qty: number;
+  date: number;
+  item: any;
+}
 export class Cart {
   private subTotal: number;
   private tax: number;
   private total: number;
-  public products: any[];
+  public products: Product[];
 
   constructor() {
     this.subTotal = 0;
@@ -45,54 +50,49 @@ export class Cart {
     return this.products;
   }
 
+  private computeTotals() {
+    let total = 0;
+    for(const product of this.products) {
+      total += Number(product.item.price);
+    }
+    this.subTotal += total;
+    this.tax = Number(this.subTotal * 0.09);
+    this.total = Number(this.tax + this.subTotal);
+  }
+
   public addProduct(product: any) {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].item.id === product.id) {
         this.products[i].qty += 1;
         this.products[i].date = Date.now();
-        this.subTotal += Number(product.price);
-        this.tax = Number(this.subTotal * 0.09);
-        this.total = Number(this.tax + this.subTotal);
+        this.computeTotals();
         return;
       }
     }
-    this.products.push({ qty: 1, item: product, date: Date.now() });
-    this.subTotal += Number(product.price);
-    this.tax = Number(this.subTotal * 0.09);
-    this.total = Number(this.tax + this.subTotal);
+    this.products.push({ 
+      qty: 1, 
+      item: product, 
+      date: Date.now() 
+    });
+    this.computeTotals();
   }
 
   public updateProductQuantity(id: string, qty: number) {
-    let price = 0;
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].item.id === id) {
-        price += Number(this.products[i].item.price) * qty;
         this.products[i].qty = qty;
-      } else {
-        price += Number(this.products[i].item.price * this.products[i].qty);
-      }
+      } 
       if(this.products[i].qty === 0) {
         this.products.splice(i, 1);
       }
     }
-    this.subTotal = price;
-    this.tax = Number(this.subTotal * 0.09);
-    this.total = Number(this.tax + this.subTotal);
+    this.computeTotals();
   }
 
   public deleteProductFromCart(id: string) {
-    const existing = [...this.products];
-    this.products = [];
-    this.subTotal = 0;
-    this.tax = 0;
-    this.total = 0;
-    for (let i = 0; i < existing.length; i++) {
-      if (existing[i].item.id !== id) {
-        this.products.push(existing[i]);
-        this.subTotal += Number(existing[i].item.price) * existing[i].qty;
-      }
-    }
-    this.tax = Number(this.subTotal * 0.09);
-    this.total = Number(this.tax + this.subTotal);
+    this.products = this.products.filter(product => {
+      return product.item.id !== id
+    });
+    this.computeTotals();
   }
 }
