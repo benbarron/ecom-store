@@ -7,11 +7,13 @@ import AppModule from './modules/app.module';
 import connectRedis from 'connect-redis';
 import redis from 'redis';
 
-const options: NestApplicationOptions = {
-  httpsOptions: {
+let options: NestApplicationOptions = {}
+
+if(process.env.NODE_ENV === 'production') {
+  Object.assign(options, {
     key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
     cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
-  }
+  })
 }
 
 async function bootstrap() {

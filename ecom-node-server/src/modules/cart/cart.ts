@@ -63,16 +63,21 @@ export class Cart {
   }
 
   public updateProductQuantity(id: string, qty: number) {
+    let price = 0;
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].item.id === id) {
+        price += Number(this.products[i].item.price) * qty;
         this.products[i].qty = qty;
-        this.subTotal = Number(this.products[i].item.price) * qty;
-        this.tax = Number(this.subTotal * 0.09);
-        this.total = Number(this.tax + this.subTotal);
-        return;
+      } else {
+        price += Number(this.products[i].item.price * this.products[i].qty);
+      }
+      if(this.products[i].qty === 0) {
+        this.products.splice(i, 1);
       }
     }
-    throw new HttpException('Product not in cart', 404);
+    this.subTotal = price;
+    this.tax = Number(this.subTotal * 0.09);
+    this.total = Number(this.tax + this.subTotal);
   }
 
   public deleteProductFromCart(id: string) {

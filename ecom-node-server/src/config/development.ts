@@ -45,7 +45,7 @@ export const development = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host: 'session-storage',
+      host: '127.0.0.1',
       port: 6379,
     },
   },

@@ -47,6 +47,8 @@ export default class ProductsController {
   public async getSearchResults(@Query() query: any) {
     query.q = query.q || '';
     query.cat = query.cat || '';
+    query.page = query.page || 1;
+    query.size = query.size || 10;
     const q = query.q.split('+').join(' ');
     const cat = query.cat.split('+').join(' ');
     const page = parseInt(query.page);
