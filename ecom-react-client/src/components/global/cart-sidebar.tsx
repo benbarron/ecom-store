@@ -33,7 +33,12 @@ const CartSidebar: FC<Props> = (props: Props) => {
         {query.isFetching || query.isError || !query.data.products.length ? (
           <div className='row mt-5 d-flex justify-content-center'>
             <h5 className='text-center'>Your cart is currently empty.</h5>
-            <button className='wmt-btn-default-sm'>Add from My Items</button>
+            <button
+              className='wmt-btn-default-sm'
+              onClick={(e) => props.setSidebar('item')}
+            >
+              Add from My Items
+            </button>
           </div>
         ) : (
           query.data.products
