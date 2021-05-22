@@ -53,7 +53,7 @@ export class Cart {
   private computeTotals() {
     let total = 0;
     for(const product of this.products) {
-      total += Number(product.item.price) * Number(product.qty)
+      total += Number(product.item.price) * product.qty
     }
     this.subTotal = total;
     this.tax = Number(this.subTotal * 0.09);
