@@ -21,5 +21,13 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      var msg =
+        'This webpage is a personal project of Ben Barron and for educational purposes only. ' +
+        'This website is in no way affiliated with Walmart.';
+      if (!confirm(msg)) {
+        window.history.go(-1);
+      }
+    </script>
   </body>
 </html>
