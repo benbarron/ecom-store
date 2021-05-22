@@ -55,7 +55,7 @@ export class Cart {
     for(const product of this.products) {
       total += Number(product.item.price);
     }
-    this.subTotal += total;
+    this.subTotal = total;
     this.tax = Number(this.subTotal * 0.09);
     this.total = Number(this.tax + this.subTotal);
   }
