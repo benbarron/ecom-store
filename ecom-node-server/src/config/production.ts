@@ -1,7 +1,4 @@
 import { ConfigType } from "./type";
-import {readFileSync} from 'fs';
-
-
 
 export const production = (): ConfigType => ({
   server: {
@@ -48,12 +45,12 @@ export const production = (): ConfigType => ({
     ttl: 60 * 60 * 24 * 7,
     store: {
       type: 'redis',
-      host:  process.env.REDIS_HOST || 'session-storage',
+      host: 'session-storage',
       port: 6379,
     },
   },
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://ecom-ui.benjbarron.com',
     credentials: true,
     allowedHeaders: [
       'Origin', 

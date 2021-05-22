@@ -1,22 +1,22 @@
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { Logger, NestApplicationOptions } from '@nestjs/common';
 import { readFileSync } from 'fs';
 import session, { SessionOptions } from 'express-session';
 import AppModule from './modules/app.module';
 import connectRedis from 'connect-redis';
 import redis from 'redis';
 
-const https = {
-  key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
-  cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
+const options: NestApplicationOptions = {
+  httpsOptions: {
+    key: readFileSync(process.cwd() + '/ssl/key.pem', 'utf-8'),
+    cert: readFileSync(process.cwd() + '/ssl/cert.pem', 'utf-8')
+  }
 }
 
 async function bootstrap() {
-  const adapter = new FastifyAdapter({ https });
+  const app = await NestFactory.create(AppModule, options);
   const logger = new Logger('NestApplication');
-  const app = await NestFactory.create(AppModule, adapter);
   const config = app.get(ConfigService);
   const mode = config.get('server.mode');
 
