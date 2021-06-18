@@ -10,8 +10,6 @@ const StoreLocator: FC<Props> = (props: Props) => {
   const [value, setValue] = useState('');
   const query = useSearchStores(value);
 
-  console.log(query.data);
-
   return (
     <div className='modal-page-wrapper'>
       <div className='store-locator-modal'>
@@ -41,7 +39,7 @@ const StoreLocator: FC<Props> = (props: Props) => {
           {query.isFetched &&
             query.isSuccess &&
             query.data.results.map((store: any) => (
-              <div className='store-result'>
+              <div className='store-result' key={store.id.raw}>
                 <div>
                   <h6>{store.address.raw}</h6>
                   <small>

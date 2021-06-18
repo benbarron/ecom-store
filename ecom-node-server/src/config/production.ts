@@ -12,6 +12,13 @@ export const production = (): ConfigType => ({
       port: 443,
     }
   },
+    mongo: {
+    uri: 'mongodb+srv://benbarron:secret-password@cluster0.kzpr8.mongodb.net/2fa-db?retryWrites=true&w=majority'
+  },
+   jwt: {
+    secret: 'super-secret-key-123',
+    expiration: 100 * 100 * 60 * 60,
+  },
   eureka: {
     instance: {
       instanceId: 'PRODUCTS-SERVICE',

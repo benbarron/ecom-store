@@ -1,5 +1,3 @@
-import { HttpException } from '@nestjs/common';
-
 interface Product {
   qty: number;
   date: number;
@@ -50,14 +48,18 @@ export class Cart {
     return this.products;
   }
 
+  private roundDecimals(value: number) {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  }
+
   private computeTotals() {
     let total = 0;
     for(const product of this.products) {
       total += Number(product.item.price) * product.qty
     }
-    this.subTotal = total;
-    this.tax = Number(this.subTotal * 0.09);
-    this.total = Number(this.tax + this.subTotal);
+    this.subTotal = this.roundDecimals(total);
+    this.tax = this.roundDecimals(Number(this.subTotal * 0.09));
+    this.total = this.roundDecimals(Number(this.tax + this.subTotal));
   }
 
   public addProduct(product: any) {

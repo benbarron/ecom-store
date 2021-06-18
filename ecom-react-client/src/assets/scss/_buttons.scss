@@ -11,6 +11,9 @@
     background-color: darken(#0065ff, 10);
     transition: ease-in 0.3s;
   }
+  &:disabled {
+    background-color: #b2bec3;
+  }
 }
 
 .wmt-btn-primary-sm {
@@ -18,6 +21,9 @@
     cursor: pointer;
     background-color: darken(#0065ff, 10);
     transition: ease-in 0.3s;
+  }
+  &:disabled {
+    background-color: #b2bec3;
   }
   text-align: center;
   background-color: #0065ff;
@@ -35,6 +41,9 @@
     cursor: pointer;
     background-color: darken(#0065ff, 10);
     transition: ease-in 0.3s;
+  }
+  &:disabled {
+    background-color: #b2bec3;
   }
   text-align: center;
   background-color: #0065ff;
@@ -103,4 +112,25 @@
     .spinner {
     }
   }
+}
+
+.icon-button-primary {
+  &:hover {
+    cursor: pointer;
+    background-color: darken(#0065ff, 10);
+    transition: ease-in 0.3s;
+  }
+  &:disabled {
+    background-color: #b2bec3;
+  }
+  text-align: center;
+  background-color: #0065ff;
+  border: none;
+  color: #fff;
+  border-radius: 25px;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  border-radius: 50%;
+  font-weight: bolder;
 }

@@ -1,12 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
 import React, { FC, Fragment } from 'react';
-import { useQuery } from 'react-query';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Product } from '../utils/interfaces';
-import ProductCard from './global/product-card';
-import * as Spinners from 'react-spinners';
 import { useSearchProducts } from '../utils/hooks';
+import ProductCard from './global/product-card';
 import SearchSidebar from './global/search-sidebar';
+import * as Spinners from 'react-spinners';
+import ContentWrapper from './content-wrapper';
 
 interface Props extends RouteComponentProps {}
 
@@ -22,30 +21,34 @@ const SearchPage: FC<Props> = (props: Props) => {
 
   if (query.isLoading) {
     return (
-      <div className='loader-wrapper'>
-        <Spinners.ClipLoader size={150} color={'#0076dc'} />
-      </div>
+      <ContentWrapper showSidebar={true}>
+        <div className='loader-wrapper'>
+          <Spinners.ClipLoader size={150} color={'#0076dc'} />
+        </div>
+      </ContentWrapper>
     );
   }
 
   if (query.isError) {
     return (
-      <Fragment>
-        <div className='d-flex justify-content-center mt-5'>
-          <h6>
-            We are sorry for the inconvienence, but we enountered an error while
-            executing your search query.{' '}
-          </h6>
-        </div>
-        <div className='d-flex justify-content-center mt-5'>
-          <button
-            onClick={(e) => query.refetch()}
-            className='wmt-btn-default-sm mt-4'
-          >
-            Try again
-          </button>
-        </div>
-      </Fragment>
+      <ContentWrapper showSidebar={true}>
+        <Fragment>
+          <div className='d-flex justify-content-center mt-5'>
+            <h6>
+              We are sorry for the inconvienence, but we enountered an error
+              while executing your search query.{' '}
+            </h6>
+          </div>
+          <div className='d-flex justify-content-center mt-5'>
+            <button
+              onClick={(e) => query.refetch()}
+              className='wmt-btn-default-sm mt-4'
+            >
+              Try again
+            </button>
+          </div>
+        </Fragment>
+      </ContentWrapper>
     );
   }
 
@@ -79,7 +82,7 @@ const SearchPage: FC<Props> = (props: Props) => {
   };
 
   return (
-    <Fragment>
+    <ContentWrapper showSidebar={true}>
       <div className='search-page-wrapper'>
         <SearchSidebar searchValue={params.get('q') || ''} />
         <div className='results-wrapper'>
@@ -121,7 +124,7 @@ const SearchPage: FC<Props> = (props: Props) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </ContentWrapper>
   );
 };
 

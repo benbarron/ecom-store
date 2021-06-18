@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "ecom-react-client"
+	},
+	{
+		"path": "ecom-node-server"
+	},
+	{
+		"path": "ecom-design-docs"
+	}
+],
+  "settings": {}
+}

@@ -144,3 +144,57 @@ nav.top-nav {
     }
   }
 }
+.sidenav {
+  padding: 15px;
+  position: fixed;
+  z-index: 500;
+  height: 100vh;
+  width: 300px;
+  background-color: #efefef;
+  left: -300px;
+  top: 0;
+  -webkit-box-shadow: -9px 5px 25px 13px rgba(0, 0, 0, 0.43);
+  box-shadow: -9px 5px 25px 13px rgba(0, 0, 0, 0.43);
+  border-right: #444 0.2px solid;
+  transition: all 0.3s ease;
+  &.enter {
+    left: -150px;
+  }
+  &.enter-done {
+    left: 0;
+  }
+  &.exit {
+    left: -150px;
+  }
+  &.exit-done {
+    left: -300px;
+  }
+  .user-text {
+    align-self: center;
+    justify-self: center;
+    font-weight: 550;
+    font-size: 18px;
+  }
+  .sidenav-links {
+    margin-top: 50px;
+    .link {
+      cursor: pointer;
+      padding: 5px;
+      border-bottom: #889 0.4px solid;
+      margin-top: 10px;
+      i {
+        color: #222;
+        margin-right: 20px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      a {
+        color: #222;
+        text-decoration: none;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

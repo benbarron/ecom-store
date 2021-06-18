@@ -1,4 +1,12 @@
 body {
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    /* Hide scrollbar for IE, Edge and Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
   overflow-y: hidden;
   .main-wrapper {
     width: 100vw;
@@ -15,6 +23,9 @@ body {
       top: 54px;
       z-index: 100;
       border-right: 0.1px #333 solid;
+      &.full {
+        width: 100vw;
+      }
       &.enter,
       &.exit-done {
         width: calc(100vw - 340px);

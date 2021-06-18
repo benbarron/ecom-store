@@ -67,8 +67,19 @@ export interface CorsOptions {
     optionsSuccessStatus?: number;
 }
 
+export interface MongoConfig {
+  uri: string;
+}
+
+export interface JwtConfig {
+  secret: string;
+  expiration: number
+}
+
 
 export interface ConfigType {
+  jwt: JwtConfig
+  mongo: MongoConfig
   server: Server
   eureka: Eureka
   cache: Cache

@@ -1,50 +1,79 @@
-import React, { FC, Fragment, useState } from 'react';
-import { Route, Switch } from 'react-router';
-import CartSidebar from './components/global/cart-sidebar';
-import Navbar from './components/global/navbar';
-import { CSSTransition } from 'react-transition-group';
-import StoreLocator from './components/global/store-locator';
-import ItemSidebar from './components/global/item-sidebar';
+import React, { FC, Fragment, useEffect, useState } from 'react';
+import { Redirect, Route, Switch } from 'react-router';
+import { loadUser } from './redux/auth-actions';
+import { useAction, useAppSelector } from './redux/redux-hooks';
+import { RootState } from './redux/store';
+
+import Login from './components/auth/login';
+import Verify from './components/auth/verify';
+import Register from './components/auth/register';
+import Checkout from './components/checkout';
+import Home from './components/home';
+import Search from './components/search';
+import Product from './components/product';
+import Account from './components/account';
 
 const App: FC = () => {
-  const [showLocationModal, setShowLocationModal] = useState(false);
-  const [sidebar, setSidebar] = useState<'cart' | 'item'>('cart');
+  const loadUserAction = useAction(loadUser);
+  const auth = useAppSelector((state: RootState) => state.auth);
 
-  const toggleStoreLocator = () => {
-    setShowLocationModal(!showLocationModal);
-  };
+  useEffect(() => {
+    loadUserAction();
+  }, []);
 
   return (
     <Fragment>
-      <Navbar toggleStoreLocator={toggleStoreLocator} setSidebar={setSidebar} />
-      <CSSTransition in={showLocationModal} timeout={150}>
-        <StoreLocator toggleStoreLocator={toggleStoreLocator} />
-      </CSSTransition>
-      <div className='main-wrapper'>
-        <div className={`main-page-content`}>
-          <Switch>
-            <Route
-              exact
-              path={'/'}
-              component={React.lazy(() => import('./components/home'))}
-            />
-            <Route
-              exact
-              path={'/product/:id'}
-              component={React.lazy(() => import('./components/product'))}
-            />
-            <Route
-              exact
-              path={'/search'}
-              component={React.lazy(() => import('./components/search'))}
-            />
-          </Switch>
-        </div>
-        <div className='sidebar-content'>
-          {sidebar === 'cart' && <CartSidebar setSidebar={setSidebar} />}
-          {sidebar === 'item' && <ItemSidebar setSidebar={setSidebar} />}
-        </div>
-      </div>
+      <Switch>
+        <Route
+          exact
+          path={'/login'}
+          // component={React.lazy(() => import('./components/auth/login'))}
+          component={Login}
+        />
+        <Route
+          exact
+          path={'/register'}
+          // component={React.lazy(() => import('./components/auth/register'))}
+          component={Register}
+        />
+        <Route
+          exact
+          path={'/verify'}
+          // component={React.lazy(() => import('./components/auth/verify'))}
+          component={Verify}
+        />
+        <Route
+          exact
+          path={'/checkout'}
+          // render={React.lazy(() => import('./components/checkout'))}
+          component={Checkout}
+        />
+        <Route
+          exact
+          path={'/'}
+          // component={React.lazy(() => import('./components/home'))}
+          component={Home}
+        />
+        <Route
+          exact
+          path={'/product/:id'}
+          // component={React.lazy(() => import('./components/product'))}
+          component={Product}
+        />
+        <Route
+          exact
+          path={'/search'}
+          // component={React.lazy(() => import('./components/search'))}
+          component={Search}
+        />
+        <Route
+          exact
+          path={'/account'}
+          // component={React.lazy(() => import('./components/account'))}
+          component={Account}
+        />
+        <Route path={'*'} render={() => <Redirect to='/' />} />
+      </Switch>
     </Fragment>
   );
 };

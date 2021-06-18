@@ -31,8 +31,10 @@
     "@types/eureka-js-client": "^4.5.2",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/lodash": "^4.14.169",
+    "@types/mongoose": "^5.11.97",
     "@types/redis": "^2.8.28",
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "cache-manager": "^3.4.3",
     "connect-redis": "^5.2.0",
     "eureka-js-client": "^4.5.0",
@@ -40,10 +42,12 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "module": "^1.2.5",
+    "mongoose": "^5.12.13",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "speakeasy": "^2.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",

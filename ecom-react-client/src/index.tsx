@@ -1,8 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import ReactDOM from 'react-dom';
+import FallbackPage from './components/fallback';
 import App from './App';
 import axios from 'axios';
 import './assets/scss/main.scss';
@@ -19,9 +22,9 @@ const queryClient = new QueryClient({
 });
 
 const root = (
-  <React.StrictMode>
+  <Provider store={store}>
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={'Loading'}>
+      <Suspense fallback={FallbackPage}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
@@ -33,11 +36,7 @@ const root = (
         />
       )}
     </QueryClientProvider>
-  </React.StrictMode>
+  </Provider>
 );
-
-// window.onerror = (e: any) => {
-//   axios.post('http://localhost:8080/api/logger/error', e);
-// };
 
 ReactDOM.render(root, document.getElementById('root'));

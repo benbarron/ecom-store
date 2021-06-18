@@ -21,15 +21,13 @@ export default class ProductsController {
     type Res = { meta: any; results: any[] };
     const res: Res = await this.productsService.categorySuggestions(query.q);
     res.results.forEach((product) => {
-      product.category.raw.forEach((category) => {
-        if (!set.has(category)) {
-          set.add(category);
+      product.category && product.category.raw.forEach((category) => {
+        if(!set.has(category)) {
+          arr.push(category);
         }
+        set.add(category);
       });
     });
-    for (const v of set.values()) {
-      arr.push(v);
-    }
     return { suggestions: arr };
   }
 
